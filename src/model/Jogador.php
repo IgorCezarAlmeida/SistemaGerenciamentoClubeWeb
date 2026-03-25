@@ -9,14 +9,23 @@ use Doctrine\ORM\Mapping as ORM;
 class Jogador extends GenericModel{
     #[ORM\Column(type: 'string')]
     private $nome;
+    #[ORM\Column(type: 'float')]
+    private $peso;
     #[ORM\Column(type: 'string')]
-    private $email;
+    private $altura;
     #[ORM\Column(type: 'string')]
     private $numeroCamisa;
     #[ORM\Column(type: 'string')]
-    private $salario;
+    private $descricao;
     #[ORM\Column(type: 'date')]
     private $dataNascimento;
+    #[ORM\Column(type: 'string')]
+    private $pernaDominante;
+    #[ORM\Column(type: 'string')]
+    private $posicao;
+    #[ORM\JoinColumn(name: 'lesao_id')]
+    #[ORM\ManyToOne(targetEntity: Lesao::class)]
+    private $lesao;
 
     public function getNome()
     {
@@ -26,16 +35,6 @@ class Jogador extends GenericModel{
     public function setNome($nome)
     {
         $this->nome = $nome;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
     }
 
     public function getNumeroCamisa()
@@ -48,15 +47,6 @@ class Jogador extends GenericModel{
         $this->numeroCamisa = $numeroCamisa;
     }
 
-    public function getSalario()
-    {
-        return $this->salario;
-    }
-
-    public function  setSalario($salario){
-        $this->salario = $salario;
-    }
-
     public function getDataNascimento()
     {
         return $this->dataNascimento;
@@ -64,4 +54,55 @@ class Jogador extends GenericModel{
     public function setDataNascimento($dataNascimento){
         $this->dataNascimento = $dataNascimento;
     }
+
+    public function getPeso()
+    {
+        return $this->peso;
+    }
+
+    public function setPeso($peso): void
+    {
+        $this->peso = $peso;
+    }
+
+    public function getAltura()
+    {
+        return $this->altura;
+    }
+
+    public function setAltura($altura): void
+    {
+        $this->altura = $altura;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function setDescricao($descricao): void
+    {
+        $this->descricao = $descricao;
+    }
+
+    public function getPernaDominante()
+    {
+        return $this->pernaDominante;
+    }
+
+    public function setPernaDominante($pernaDominante): void
+    {
+        $this->pernaDominante = $pernaDominante;
+    }
+
+    public function getPosicao()
+    {
+        return $this->posicao;
+    }
+
+    public function setPosicao($posicao): void
+    {
+        $this->posicao = $posicao;
+    }
+
 }
