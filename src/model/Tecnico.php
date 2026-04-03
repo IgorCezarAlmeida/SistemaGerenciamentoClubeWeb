@@ -1,18 +1,16 @@
 <?php
 
-namespace Igor\Evox\model;
+namespace model;
 
 use Doctrine\ORM\Mapping as ORM;
 use model\GenericModel;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'tecnico')]
+#[ORM\Table(name: 'tb_tecnico')]
 class Tecnico extends GenericModel
 {
     #[ORM\Column(type: 'string')]
     private $nome;
-    #[ORM\Column(type: 'string')]
-    private $cpf;
     #[ORM\Column(type: 'date')]
     private $dataNascimento;
     #[ORM\Column(type: 'string')]
@@ -24,14 +22,6 @@ class Tecnico extends GenericModel
     }
     public function setNome($nome){
         $this->nome = $nome;
-    }
-
-    public function getCpf(){
-        return $this->cpf;
-    }
-
-    public function setCpf($cpf){
-        $this->cpf = $cpf;
     }
 
     public function getDataNascimento(){

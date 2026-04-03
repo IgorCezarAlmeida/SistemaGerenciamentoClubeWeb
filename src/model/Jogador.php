@@ -17,15 +17,20 @@ class Jogador extends GenericModel{
     private $numeroCamisa;
     #[ORM\Column(type: 'string')]
     private $descricao;
-    #[ORM\Column(type: 'date')]
-    private $dataNascimento;
     #[ORM\Column(type: 'string')]
     private $pernaDominante;
     #[ORM\Column(type: 'string')]
     private $posicao;
-    #[ORM\JoinColumn(name: 'lesao_id')]
-    #[ORM\ManyToOne(targetEntity: Lesao::class)]
-    private $lesao;
+    #[ORM\OneToMany(mappedBy: "jogador",targetEntity: Lesao::class,cascade: ["all"], orphanRemoval: true)]
+    private $lesoes;
+    #[ORM\OneToOne(targetEntity: Contrato::class, cascade: ['all'], orphanRemoval: true, fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: "contrato_id")]
+    private $contrato;
+    #[ORM\OneToOne(targetEntity: Estatisticas::class, cascade: ['all'], orphanRemoval: true, fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: "estatisticas_id")]
+    private $estatisticas;
+    #[ORM\ManyToMany(targetEntity: Escalacao::class,mappedBy: "jogadoresEscalados")]
+    private $escalacoesJogador;
 
     public function getNome()
     {
@@ -39,20 +44,12 @@ class Jogador extends GenericModel{
 
     public function getNumeroCamisa()
     {
-        return $this->NumeroCamisa;
+        return $this->numeroCamisa;
     }
 
     public function setNumeroCamisa($numeroCamisa)
     {
         $this->numeroCamisa = $numeroCamisa;
-    }
-
-    public function getDataNascimento()
-    {
-        return $this->dataNascimento;
-    }
-    public function setDataNascimento($dataNascimento){
-        $this->dataNascimento = $dataNascimento;
     }
 
     public function getPeso()
@@ -104,5 +101,46 @@ class Jogador extends GenericModel{
     {
         $this->posicao = $posicao;
     }
+
+    public function getLesoes()
+    {
+        return $this->lesoes;
+    }
+
+    public function setLesoes($lesoes): void
+    {
+        $this->lesoes = $lesoes;
+    }
+
+    public function getContrato()
+    {
+        return $this->contrato;
+    }
+
+    public function setContrato($contrato): void
+    {
+        $this->contrato = $contrato;
+    }
+
+    public function getEscalacoesJogador()
+    {
+        return $this->escalacoesJogador;
+    }
+
+    public function setEscalacoesJogador($escalacoesJogador): void
+    {
+        $this->escalacoesJogador = $escalacoesJogador;
+    }
+
+    public function getEstatisticas()
+    {
+        return $this->estatisticas;
+    }
+
+    public function setEstatisticas($estatisticas): void
+    {
+        $this->estatisticas = $estatisticas;
+    }
+
 
 }

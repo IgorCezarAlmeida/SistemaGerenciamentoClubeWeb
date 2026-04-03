@@ -12,11 +12,16 @@ class Partida extends GenericModel{
     private $hora;
     #[ORM\Column(type: "string", length: 100)]
     private $local;
-    #[ORM\OneToMany(mappedBy:"partida",targetEntity: Torneio::class,cascade: ['all'], orphanRemoval: true)]
+    #[ORM\Column(type: "string",length: 50)]
+    private $mandoDeCampo;
+    #[ORM\Column(type: "string",length: 8)]
+    private $resultadoFinal;
+    #[ORM\JoinColumn(name: "timeAdversario_id")]
+    #[ORM\ManyToOne(targetEntity: TimeAdversario::class)]
+    private $Timeadversario;
+    #[ORM\JoinColumn(name: 'torneio_id')]
+    #[ORM\ManyToOne(targetEntity: Torneio::class)]
     private $torneio;
-    #[ORM\JoinColumn(name: 'jogo_id')]
-    #[ORM\ManyToOne(targetEntity: Jogo::class)]
-    private $jogo;
 
     public function getData()
     {
@@ -58,14 +63,35 @@ class Partida extends GenericModel{
         $this->torneio = $torneio;
     }
 
-    public function getJogo()
+    public function getMandoDeCampo()
     {
-        return $this->jogo;
+        return $this->mandoDeCampo;
     }
 
-    public function setJogo($jogo): void
+    public function setMandoDeCampo($mandoDeCampo): void
     {
-        $this->jogo = $jogo;
+        $this->mandoDeCampo = $mandoDeCampo;
     }
+
+    public function getResultadoFinal()
+    {
+        return $this->resultadoFinal;
+    }
+
+    public function setResultadoFinal($resultadoFinal): void
+    {
+        $this->resultadoFinal = $resultadoFinal;
+    }
+
+    public function getTimeadversario()
+    {
+        return $this->Timeadversario;
+    }
+
+    public function setTimeadversario($Timeadversario): void
+    {
+        $this->Timeadversario = $Timeadversario;
+    }
+
 
 }

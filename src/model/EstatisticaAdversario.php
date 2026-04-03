@@ -1,16 +1,16 @@
 <?php
-namespace Model;
+namespace model;
 
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'tb_estatisticaAdversario')]
 class EstatisticaAdversario extends GenericModel{
-    #[ORM\Column(type: "String", length: 3)]
+    #[ORM\Column(type: "string", length: 3)]
     private $posseBolaMedia;
-    #[ORM\Column(type: "String", length: 3)]
+    #[ORM\Column(type: "string", length: 3)]
     private $golsSofridos;
-    #[ORM\Column(type: "String", length: 10)]
+    #[ORM\Column(type: "string", length: 10)]
     private $formacaoComum;
     #[ORM\OneToOne(targetEntity: TimeAdversario::class, cascade: ['all'], orphanRemoval: true)]
     private $timeAdversario;

@@ -10,14 +10,16 @@
      private $tipoLesao;
      #[ORM\Column(type: 'string', length: 255)]
      private $gravidadeLesao;
-     #[ORM\Column(type: 'date')]
+     #[ORM\Column(type: 'string')]
      private $inicioLesao;
-     #[ORM\Column(type: 'date')]
+     #[ORM\Column(type: 'string')]
      private $fimLesao;
      #[ORM\Column(type: 'string', length: 255)]
      private $ObservacaoDP;
-     #[ORM\OneToMany(mappedBy: "lesao",targetEntity: Jogador::class,cascade: ["all"], orphanRemoval: true)]
+     #[ORM\JoinColumn(name: 'jogador_id')]
+     #[ORM\ManyToOne(targetEntity: Jogador::class)]
      private $jogador;
+
 
      public function getTipoLesao()
      {

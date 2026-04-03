@@ -6,13 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'tb_treino')]
 class Treino extends GenericModel{
-    #[ORM\Column(type: 'String', length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $focoTatico;
-    #[ORM\Column(type: 'String', length: 50)]
+    #[ORM\Column(type: 'string', length: 50)]
     private $intensidade;
-    #[ORM\Column(type: 'String', length: 50)]
+    #[ORM\Column(type: 'string', length: 50)]
     private $clima;
-    #[ORM\Column(type: 'String', length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $descricao;
 
 

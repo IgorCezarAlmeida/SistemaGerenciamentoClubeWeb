@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'igor/evox',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '895aa827d90a327571f2582399ee5d51f0bc85e3',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -101,9 +101,9 @@
             'dev_requirement' => false,
         ),
         'igor/evox' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '895aa827d90a327571f2582399ee5d51f0bc85e3',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

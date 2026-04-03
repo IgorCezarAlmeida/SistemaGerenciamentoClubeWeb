@@ -6,19 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'tb_TimeAdversario')]
 class TimeAdversario extends GenericModel{
-    #[ORM\Column(type: 'String', length: 50, unique: true)]
+    #[ORM\Column(type: 'string', length: 50, unique: true)]
     private $nome;
-    #[ORM\Column(type: 'String', length: 200)]
+    #[ORM\Column(type: 'string', length: 200)]
     private $estiloDeJogoPredominante;
-    #[ORM\Column(type: 'String', length: 200)]
+    #[ORM\Column(type: 'string', length: 200)]
     private $pontosFortes;
-    #[ORM\Column(type: 'String', length: 200)]
+    #[ORM\Column(type: 'string', length: 200)]
     private $pontosFracos;
-    #[ORM\Column(type: 'String', length: 100)]
+    #[ORM\Column(type: 'string', length: 100)]
     private $tecnicoAdversario;
-    #[ORM\JoinColumn(name: 'jogo_id')]
-    #[ORM\ManyToOne(targetEntity: Jogo::class)]
-    private $jogo;
+    #[ORM\OneToMany(mappedBy:"timeAdversario",targetEntity: Partida::class,cascade: ['all'], orphanRemoval: true)]
+    private $partidas;
 
     public function getNome()
     {
@@ -70,15 +69,14 @@ class TimeAdversario extends GenericModel{
         $this->tecnicoAdversario = $tecnicoAdversario;
     }
 
-    public function getJogo()
+    public function getPartidas()
     {
-        return $this->jogo;
+        return $this->partidas;
     }
 
-    public function setJogo($jogo): void
+    public function setPartidas($partidas): void
     {
-        $this->jogo = $jogo;
+        $this->partidas = $partidas;
     }
-
 
 }

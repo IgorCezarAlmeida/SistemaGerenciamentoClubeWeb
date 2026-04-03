@@ -24,8 +24,6 @@ class Estatisticas extends GenericModel{
     private $cartoesAmarelos;
     #[ORM\Column(type: 'integer')]
     private $cartoesVermelhos;
-    #[ORM\OneToOne(targetEntity: Jogador::class,cascade: ["all"])]
-    private $jogador;
 
     public function getGols()
     {
@@ -98,14 +96,6 @@ class Estatisticas extends GenericModel{
     public function setCartoesVermelhos($cartoesVermelhos): void
     {
         $this->cartoesVermelhos = $cartoesVermelhos;
-    }
-    public function getJogador()
-    {
-        return $this->jogador;
-    }
-    public function setJogador($jogador): void
-    {
-        $this->jogador = $jogador;
     }
 
 }
