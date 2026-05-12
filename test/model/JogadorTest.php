@@ -1,5 +1,6 @@
 <?php
 
+namespace test\model;
 
 use dao\JogadorDAO;
 use model\Contrato;
@@ -13,10 +14,11 @@ class JogadorTest extends TestCase{
         $jogador = new Jogador();
         $jogador->setNome("Igor");
         $jogador->setNumeroCamisa("10");
+
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
         $this->assertNotNull($jogador);
     }
     public function testBuscarId(){
@@ -25,8 +27,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
         $jogador = JogadorDAO::salvar($jogador);
 
         $jogadorBuscado = JogadorDAO::buscarId($jogador->getId());
@@ -39,8 +41,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
         $jogador = JogadorDAO::salvar($jogador);
 
         $jogadorDeletar = JogadorDAO::buscarId($jogador->getId());
@@ -59,8 +61,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
         $jogador = JogadorDAO::salvar($jogador);
 
         $jogadoresBuscados = JogadorDAO::buscarNome("Igor");
@@ -74,8 +76,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
         $jogador = JogadorDAO::salvar($jogador);
 
         $jogadoresBuscados = JogadorDAO::buscarNomeParecido("Igo");
@@ -90,8 +92,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
 
         $contrato = new Contrato();
         $contrato->setSalario(100000);
@@ -108,8 +110,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
 
 
         $lesao1 = new Lesao();
@@ -142,8 +144,8 @@ class JogadorTest extends TestCase{
         $jogador->setNumeroCamisa("10");
         $jogador->setPernaDominante("Direita");
         $jogador->setDescricao("Experiente");
-        $jogador->setPeso(70.2);
-        $jogador->setAltura(170);
+        $jogador->setPesoKG(70.2);
+        $jogador->setAlturaCM(170);
 
         $estatistica = new Estatisticas();
         $estatistica->setGols(11);

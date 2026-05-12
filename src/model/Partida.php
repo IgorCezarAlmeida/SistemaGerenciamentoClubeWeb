@@ -16,7 +16,7 @@ class Partida extends GenericModel{
     private $mandoDeCampo;
     #[ORM\Column(type: "string",length: 8)]
     private $resultadoFinal;
-    #[ORM\JoinColumn(name: "timeAdversario_id")]
+    #[ORM\JoinColumn(name: "time_Adversario_id")]
     #[ORM\ManyToOne(targetEntity: TimeAdversario::class)]
     private $Timeadversario;
     #[ORM\JoinColumn(name: 'torneio_id')]

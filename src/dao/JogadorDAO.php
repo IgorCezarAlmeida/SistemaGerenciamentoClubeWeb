@@ -26,7 +26,7 @@ class JogadorDAO extends GenericDAO {
     public static function buscarNomeParecido($nome){
         try {
             $em = Conexao::getEntityManager();
-            $query = $em->createQuery("SELECT c FROM model\Cliente c WHERE c.nome LIKE :nome");
+            $query = $em->createQuery("SELECT c FROM model\Jogador c WHERE c.nome LIKE :nome");
             $query->setParameter("nome", "%" . $nome . "%");
             return $query->getResult();
         } catch (Exception $ex){

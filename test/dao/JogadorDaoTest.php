@@ -1,6 +1,7 @@
 <?php
 namespace test\dao;
 
+use DateTime;
 use  model\Lesao;
 use dao\JogadorDAO;
 use model\Jogador;
@@ -12,10 +13,11 @@ class JogadorDaoTest extends TestCase{
     public function testInserir(){
         $jogador = new Jogador();
         $jogador->setNome("Jogador");
-        $jogador->setNumeroCamisa(10);
-        $jogador->setDataNascimento("11-11-1990");
-        $jogador->setPeso(70);
-        $jogador->setAltura(170);
+        $jogador->setNumeroCamisa(33);
+        $jogador->setDataNascimento(New DateTime("2000/01/01"));
+        $jogador->setDisponivel("Disponivel");
+        $jogador->setPesoKG(70);
+        $jogador->setAlturaCM(170);
         $jogador->setDescricao("Jogador experiente");
         $jogador->setPernaDominante("direita");
         $jogador->setPosicao("atacante");
@@ -36,10 +38,11 @@ class JogadorDaoTest extends TestCase{
     public function testInserirJogadorLesao(){
         $jogador = new Jogador();
         $jogador->setNome('Jogador');
-        $jogador->setNumeroCamisa(10);
-        $jogador->setDataNascimento('2020-01-01');
-        $jogador->setPeso(70);
-        $jogador->setAltura(170);
+        $jogador->setNumeroCamisa(44);
+        $jogador->setDataNascimento(DateTime::createFromFormat('d/m/Y', '11/11/2000'));
+        $jogador->setDisponivel("Disponivel");
+        $jogador->setPesoKG(70);
+        $jogador->setAlturaCM(170);
         $jogador->setDescricao("Jogador experiente");
         $jogador->setPernaDominante("direita");
         $jogador->setPosicao("atacante");
@@ -49,16 +52,13 @@ class JogadorDaoTest extends TestCase{
         $lesao1->setInicioLesao("11/11/1111");
         $lesao1->setFimLesao("11/11/1111");
         $lesao1->setGravidadeLesao("leve");
-        $lesao1->setObservacaoDP("Muy demorado");
+        $lesao1->setObservacaoDP("Muito demorado");
         $lesao1->setJogador($jogador);
 
         $lesoes[] = $lesao1;
+        $jogador->setLesoes($lesoes);  // Adicionado
 
         $jogadorInserido = JogadorDAO::salvar($jogador);
         $this->assertNotNull($jogadorInserido->getId());
     }
-
-    public function testDeletarJogador(){
-
-}
 }

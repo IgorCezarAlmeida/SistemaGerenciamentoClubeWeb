@@ -16,6 +16,7 @@ class ComposerStaticInitcacf51044622fe7faf0b055989a250af
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
     );
 
@@ -66,6 +67,10 @@ class ComposerStaticInitcacf51044622fe7faf0b055989a250af
         'G' =>
         array (
             'GrahamCampbell\\ResultType\\' => 26,
+        ),
+        'F' =>
+        array (
+            'FastRoute\\' => 10,
         ),
         'D' =>
         array (
@@ -175,6 +180,10 @@ class ComposerStaticInitcacf51044622fe7faf0b055989a250af
         'GrahamCampbell\\ResultType\\' =>
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'FastRoute\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
         ),
         'Dotenv\\' =>
         array (

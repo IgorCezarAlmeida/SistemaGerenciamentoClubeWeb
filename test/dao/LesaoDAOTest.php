@@ -13,7 +13,7 @@ class LesaoDAOTest extends TestCase
         $jogador = new Jogador();
         $jogador->setNome("Carlos");
         $jogador->setNumeroCamisa(5);
-        $jogador->setPeso(78);
+        $jogador->setPesoKG(78);
         $jogador->setAltura(182);
         $jogador->setDescricao("Zagueiro");
         $jogador->setPernaDominante("Direita");

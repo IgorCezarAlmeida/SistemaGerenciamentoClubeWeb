@@ -13,8 +13,8 @@ class ContratoDAOTest extends TestCase
         $jogador = new Jogador();
         $jogador->setNome("Pedro");
         $jogador->setNumeroCamisa(9);
-        $jogador->setPeso(75);
-        $jogador->setAltura(180);
+        $jogador->setPesoKG(75);
+        $jogador->setAlturaCM(180);
         $jogador->setDescricao("Centroavante");
         $jogador->setPernaDominante("Direita");
         $jogador->setPosicao("Atacante");

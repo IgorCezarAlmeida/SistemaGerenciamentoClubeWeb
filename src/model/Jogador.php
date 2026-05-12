@@ -9,11 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Jogador extends GenericModel{
     #[ORM\Column(type: 'string')]
     private $nome;
+    #[ORM\Column(type: 'date')]
+    private $data_nascimento;
+    #[ORM\Column(type: 'integer')]
+    private $pesoKG;
+    #[ORM\Column(type: 'string')]
+    private $disponivel;
     #[ORM\Column(type: 'float')]
-    private $peso;
-    #[ORM\Column(type: 'string')]
-    private $altura;
-    #[ORM\Column(type: 'string')]
+    private $alturaCM;
+    #[ORM\Column(type: 'string',unique: true)]
     private $numeroCamisa;
     #[ORM\Column(type: 'string')]
     private $descricao;
@@ -52,25 +56,26 @@ class Jogador extends GenericModel{
         $this->numeroCamisa = $numeroCamisa;
     }
 
-    public function getPeso()
+    public function getPesoKG()
     {
-        return $this->peso;
+        return $this->pesoKG;
     }
 
-    public function setPeso($peso): void
+    public function setPesoKG($pesoKG): void
     {
-        $this->peso = $peso;
+        $this->pesoKG = $pesoKG;
     }
 
-    public function getAltura()
+    public function getAlturaCM()
     {
-        return $this->altura;
+        return $this->alturaCM;
     }
 
-    public function setAltura($altura): void
+    public function setAlturaCM($alturaCM): void
     {
-        $this->altura = $altura;
+        $this->alturaCM = $alturaCM;
     }
+
 
     public function getDescricao()
     {
@@ -140,6 +145,26 @@ class Jogador extends GenericModel{
     public function setEstatisticas($estatisticas): void
     {
         $this->estatisticas = $estatisticas;
+    }
+
+    public function getDisponivel()
+    {
+        return $this->disponivel;
+    }
+
+    public function setDisponivel($disponivel): void
+    {
+        $this->disponivel = $disponivel;
+    }
+
+    public function getDataNascimento()
+    {
+        return $this->data_nascimento;
+    }
+
+    public function setDataNascimento($data_nascimento): void
+    {
+        $this->data_nascimento = $data_nascimento;
     }
 
 

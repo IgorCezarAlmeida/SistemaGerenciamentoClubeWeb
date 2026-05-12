@@ -4,7 +4,7 @@ namespace model;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'tb_TimeAdversario')]
+#[ORM\Table(name: 'tb_Time_Adversario')]
 class TimeAdversario extends GenericModel{
     #[ORM\Column(type: 'string', length: 50, unique: true)]
     private $nome;

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="f85d34a9-9395-4c94-885c-0d6cb0cd5b8c" name="Sistema clube Mapping">
+      <data-sources db="b93045ed-8c72-412a-b04e-d9b85048a934" ddl="f152e4a9-3e3a-431e-8eb4-505cce124e9b" />
+      <scope>
+        <node negative="1">
+          <node kind="database" negative="1">
+            <node kind="schema" negative="1" />
+          </node>
+          <node kind="schema">
+            <name qname="db_sistemaclube" />
+            <name qname="mysql" />
+          </node>
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>
