@@ -14,6 +14,10 @@ class Tecnico extends GenericModel
     #[ORM\Column(type: 'date')]
     private $dataNascimento;
     #[ORM\Column(type: 'string')]
+    private $cpf;
+    #[ORM\Column(type: 'string')]
+    private $email;
+    #[ORM\Column(type: 'string')]
     private $senha;
 
     public function getNome()
@@ -36,4 +40,26 @@ class Tecnico extends GenericModel
     public function setSenha($senha){
         $this->senha = $senha;
     }
+
+    public function getCpf()
+    {
+        return $this->cpf;
+    }
+
+    public function setCpf($cpf): void
+    {
+        $this->cpf = $cpf;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+
 }

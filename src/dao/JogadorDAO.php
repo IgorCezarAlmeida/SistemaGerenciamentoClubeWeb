@@ -19,7 +19,7 @@ class JogadorDAO extends GenericDAO {
             $repository = $em->getRepository(Jogador::class);
             return $repository->findByNome($nome);
         } catch (Exception $ex) {
-            throw new Exception("Falha ao jogador cliente pelo nome. " . $ex->getMessage());
+            throw new Exception("Falha ao jogador jogador pelo nome. " . $ex->getMessage());
         }
     }
 

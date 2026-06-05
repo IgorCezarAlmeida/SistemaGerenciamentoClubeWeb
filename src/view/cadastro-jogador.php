@@ -14,7 +14,7 @@
     <label for="nome">Nome:</label>
     <input id="nome" name="nome" type="text" required>
     <br>
-    <label for="numeroCamisa">CPF:</label>
+    <label for="numeroCamisa">Numero Camisa:</label>
     <input id="numeroCamisa" name="numeroCamisa" type="number" required>
     <br>
     <label for="pesoKG">Peso:</label>
@@ -24,7 +24,7 @@
     <input id="alturaCM" name="alturaCM" type="number" required>
     <br>
     <label for="descricao">Descrição:</label>
-    <input id="numeroCamisa" name="numeroCamisa" type="text" required>
+    <input id="descricao" name="descricao" type="text" required>
     <br>
     <label for="disponivel">Situação:</label>
     <input id="disponivel" name="disponivel" type="text" required>

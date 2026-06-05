@@ -25,6 +25,8 @@ class Jogador extends GenericModel{
     private $pernaDominante;
     #[ORM\Column(type: 'string')]
     private $posicao;
+    #[ORM\Column(type: 'string',nullable: true)]
+    private $urlFotoJogador;
     #[ORM\OneToMany(mappedBy: "jogador",targetEntity: Lesao::class,cascade: ["all"], orphanRemoval: true)]
     private $lesoes;
     #[ORM\OneToOne(targetEntity: Contrato::class, cascade: ['all'], orphanRemoval: true, fetch: 'EAGER')]
@@ -166,6 +168,17 @@ class Jogador extends GenericModel{
     {
         $this->data_nascimento = $data_nascimento;
     }
+
+    public function getUrlFotoJogador()
+    {
+        return $this->urlFotoJogador;
+    }
+
+    public function setUrlFotoJogador($urlFotoJogador): void
+    {
+        $this->urlFotoJogador = $urlFotoJogador;
+    }
+
 
 
 }

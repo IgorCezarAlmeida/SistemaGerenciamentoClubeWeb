@@ -22,6 +22,13 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->get('/jogadores/{id}', 'JogadorController@buscar');
     $r->post('/jogadores/cadastrar', 'JogadorController@cadastrar');
     $r->post('/jogadores/{id}/remover', 'JogadorController@remover');
+    $r->get('/tecnicos/novo', 'TecnicoController@novo');
+    $r->get('/tecnicos/{id}/editar', 'TecnicoController@editar');
+    $r->post('/tecnicos/cadastrar', 'TecnicoController@cadastrar');
+    $r->post('/tecnicos/{id}/remover', 'TecnicoController@remover');
+    $r->get('/login', 'TecnicoController@loginForm');
+    $r->post('/login', 'TecnicoController@autenticar');
+    $r->get('/logout', 'TecnicoController@logout');
 });
 
 // Pega apenas o caminho da URL (ex: de "/projeto/clientes?id=1" extrai apenas "/projeto/clientes")
@@ -57,7 +64,6 @@ switch ($route[0]) {
         // $route[2] contém os parâmetros (ex: ['id' => '10'])
         [$controllerClass, $action] = explode('@', $route[1]);
         $params = $route[2];
-
         // Monta o nome completo da classe (Namespace) e instancia o Controller
         $controllerNamespace = "controller\\{$controllerClass}";
         $controller = new $controllerNamespace();

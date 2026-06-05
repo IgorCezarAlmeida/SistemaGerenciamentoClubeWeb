@@ -16,7 +16,7 @@ $rota_jogadores = BASE_URL . "/jogadores";
 <?php require_once "templates/template-menu.php" ?>
 
 <h1>Listagem de Jogadores</h1>
-<a href="<?= BASE_URL . '/jogadores/novo' ?>">Cadastrar Jogador</a>
+<a class="btn btn-primary" href="<?= BASE_URL . '/jogadores/novo' ?>">Cadastrar Jogador</a>
 <table>
     <thead>
     <tr>
@@ -24,17 +24,26 @@ $rota_jogadores = BASE_URL . "/jogadores";
         <th>Nome</th>
         <th>Posição</th>
         <th>Numero Camisa</th>
+        <th>Peso</th>
+        <th>Altura</th>
+        <th>Perna Dominante</th>
+        <th>Descrição</th>
+        <th>Disponível</th>
         <th>Opções</th>
     </tr>
     </thead>
     <tbody>
     <?php foreach ($jogadores as $jogador) : ?>
-        <?= "<tr>" ?>
-        <?= "<td>{$jogador->getId()}</td>" ?>
-        <?= "<td>{$jogador->getNome()}</td>" ?>
-        <?= "<td>{$jogador->getPosicao()}</td>" ?>
-        <?= "<td>{$jogador->getNumeroCamisa()}</td>" ?>
-        <?= "<td>{$jogador->getDisponivel()}</td>" ?>
+        <tr>
+            <td><?=$jogador->getId()?></td>
+            <td><?=$jogador->getNome()?></td>
+            <td><?=$jogador->getPosicao()?></td>
+            <td><?=$jogador->getNumeroCamisa()?></td>
+            <td><?=$jogador->getAlturaCM()?></td>
+            <td><?=$jogador->getPesoKG()?></td>
+            <td><?=$jogador->getPernaDominante()?></td>
+            <td><?=$jogador->getDescricao()?></td>
+            <td><?=$jogador->getDisponivel()?></td>
         <td>
             <a href="<?= $rota_jogadores . '/' . $jogador->getId() . '/editar' ?>">Editar</a>
             <a href='<?= $rota_jogadores . '/' . $jogador->getId() ?>'>Visualizar</a>
@@ -42,7 +51,7 @@ $rota_jogadores = BASE_URL . "/jogadores";
                 <button type='submit'>Remover</button>
             </form>
         </td>
-        <?= "</tr>" ?>
+        </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
