@@ -1,122 +1,118 @@
 <?php
-// template-sidebar.php
-// Sidebar lateral esquerdo responsivo (desktop fixo / mobile offcanvas).
-// Usa BASE_URL e session já iniciada.
-
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$basePath = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'])), '/');
-$currentPath = substr($uri, strlen($basePath)) ?: '/';
-
-function isActive(string $prefix, string $currentPath): string {
-    return (strpos($currentPath, $prefix) === 0) ? 'active' : '';
-}
-
-$logado = !empty($_SESSION['tecnico_id']);
-$tecnicoNome = $_SESSION['tecnico_nome'] ?? 'Convidado';
+$logado = $dadosDashboard['logado'] ?? !empty($_SESSION['tecnico_id']);
+$tecnicoNome = $dadosDashboard['tecnico_nome'] ?? $_SESSION['tecnico_nome'] ?? 'Convidado';
 ?>
+<?php $nomeTime = $dadosDashboard['nome_time'] ?? null; ?>
 
-    <!-- Toggle button (apenas mobile) -->
-    <nav class="d-lg-none navbar bg-light">
-        <div class="container-fluid">
-            <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-                ☰ Menu
-            </button>
-            <a class="navbar-brand ms-2" href="<?= BASE_URL ?>/">Sistema Clube</a>
-        </div>
-    </nav>
+<?php if (!empty($nomeTime)): ?>
+    <small class="text-muted d-block"><?php echo htmlspecialchars($nomeTime); ?></small>
+<?php endif; ?>
 
-    <!-- Offcanvas para mobile -->
-    <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Navegação</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
-        </div>
-        <div class="offcanvas-body p-0">
-            <?php include __DIR__ . '/_sidebar_content.php'; ?>
-        </div>
-    </div>
+<style>
+    body {
+        background-color: #e5e7eb;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-    <!-- Sidebar fixo para desktop -->
-    <div class="d-none d-lg-block">
-        <aside id="appSidebar" class="bg-light border-end" style="width: 250px; min-height: 100vh; position: fixed; top:0; left:0; overflow:auto;">
-            <div class="p-3">
-                <a class="d-flex align-items-center mb-3 text-decoration-none" href="<?= BASE_URL ?>/">
-                    <!-- se tiver imagem: <img src="<?= BASE_URL ?>/assets/img/logo.png" ...> -->
-                    <div style="width:44px;height:44px;border-radius:8px;background:#667eea;color:white;display:flex;align-items:center;justify-content:center;font-weight:700;margin-right:12px;">
-                        SC
-                    </div>
-                    <div>
-                        <strong>Sistema Clube</strong><br>
-                        <small class="text-muted">Painel Técnico</small>
-                    </div>
-                </a>
+    .sidebar {
+        background-color: #111827;
+        min-height: 100vh;
+        color: #fff;
+        border-right: 2px solid #000;
+    }
 
-                <div class="mb-3">
-                    <div class="small text-muted">Logado como</div>
-                    <div class="fw-semibold"><?= htmlspecialchars($tecnicoNome) ?></div>
-                </div>
+    .sidebar .nav-link {
+        color: #9ca3af;
+        margin-bottom: 5px;
+        padding: 10px 15px;
+        font-weight: 500;
+        text-decoration: none;
+        display: block;
+        transition: all 0.3s ease;
+    }
 
-                <hr>
+    .sidebar .nav-link:hover {
+        color: #fff;
+    }
 
-                <ul class="nav nav-pills flex-column mb-3">
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL ?>/dashboard" class="nav-link <?= isActive('/dashboard', $currentPath) ?>">
-                            <i class="bi bi-speedometer2 me-2"></i> Dashboard
-                        </a>
-                    </li>
+    .sidebar .nav-link.active {
+        background-color: #f97316;
+        color: #fff;
+        border-radius: 6px;
+        box-shadow: 3px 3px 0px #000;
+    }
 
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL ?>/jogadores" class="nav-link <?= isActive('/jogadores', $currentPath) ?>">
-                            <i class="bi bi-people me-2"></i> Jogadores
-                        </a>
-                    </li>
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        background-color: #1f2937;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
 
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL ?>/treinos" class="nav-link <?= isActive('/treinos', $currentPath) ?>">
-                            <i class="bi bi-calendar-check me-2"></i> Treinos
-                        </a>
-                    </li>
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        background-color: #f97316;
+        border: 2px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 4px;
+    }
+</style>
 
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL ?>/estatisticas" class="nav-link <?= isActive('/estatisticas', $currentPath) ?>">
-                            <i class="bi bi-bar-chart-line me-2"></i> Estatísticas
-                        </a>
-                    </li>
+<div class="sidebar p-3" style="width: 250px;">
+    <h4 class="text-white mb-4 d-flex align-items-center">
+        <i class="bi bi-shield-shaded text-warning me-2"></i> TACTICAL PRO
+    </h4>
 
-                    <li class="nav-item">
-                        <a href="<?= BASE_URL ?>/relatorios" class="nav-link <?= isActive('/relatorios', $currentPath) ?>">
-                            <i class="bi bi-file-earmark-text me-2"></i> Relatórios
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="mt-auto">
-                    <hr>
-                    <?php if ($logado): ?>
-                        <a href="<?= BASE_URL ?>/perfil" class="d-block mb-2 text-decoration-none"><i class="bi bi-person-circle me-2"></i> Meu Perfil</a>
-                        <a href="<?= BASE_URL ?>/logout" class="btn btn-outline-danger w-100"><i class="bi bi-box-arrow-right me-2"></i> Sair</a>
-                    <?php else: ?>
-                        <a href="<?= BASE_URL ?>/login" class="btn btn-primary w-100">Entrar</a>
-                    <?php endif; ?>
-                </div>
+    <?php if ($logado): ?>
+        <div class="user-info mb-4">
+            <div class="user-avatar">
+                <?php echo strtoupper(substr($tecnicoNome, 0, 1)); ?>
             </div>
-        </aside>
-    </div>
-
-    <!-- Espaço à direita do sidebar para o conteúdo -->
-    <div style="margin-left: 0;" class="content-with-sidebar d-lg-block">
-        <div class="container-fluid" style="margin-left: 250px; padding-top: 20px;">
-            <!-- conteúdo da página deve ficar abaixo deste container (ou ajuste seu layout para usar margin-left) -->
+            <div>
+                <small class="text-muted d-block">Técnico</small>
+                <strong class="text-white"><?php echo htmlspecialchars($tecnicoNome); ?></strong>
+            </div>
         </div>
+    <?php endif; ?>
+
+    <ul class="nav flex-column mb-auto">
+        <li class="nav-item">
+            <a class="nav-link active" href="<?php echo BASE_URL; ?>/menu">
+                <i class="bi bi-grid-1x2 me-2"></i> Dashboard
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASE_URL; ?>/jogadores">
+                <i class="bi bi-people me-2"></i> Jogadores
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASE_URL; ?>/escalacoes">
+                <i class="bi bi-card-checklist me-2"></i> Escalações
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASE_URL; ?>/estatisticas">
+                <i class="bi bi-bar-chart-line me-2"></i> Estatísticas
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASE_URL; ?>/treinos">
+                <i class="bi bi-activity me-2"></i> Treinos
+            </a>
+        </li>
+    </ul>
+
+    <div class="pt-3 border-top border-secondary mt-auto">
+        <a class="nav-link text-danger logout-link" href="<?php echo BASE_URL; ?>/logout">
+            <i class="bi bi-box-arrow-right me-2"></i> Sair
+        </a>
     </div>
-
-<?php
-// Cria um arquivo parcial com o mesmo conteúdo do sidebar (para incluir no offcanvas)
-// Salvamos a string aqui para facilitar: se preferir, crie um arquivo físico _sidebar_content.php com o mesmo markup do lado fixo.
-?>
-
-<?php
-// Gera o conteúdo do sidebar para offcanvas (mobile). Para simplificar, gravamos em string e incluímos com eval-like include.
-// Melhor opção: criar um arquivo _sidebar_content.php com o mesmo markup do sidebar fixo.
-// Aqui, vamos escrever o conteúdo no diretório de templates se ainda não existir. (Se não quiser, copie manualmente.)
-?>
+</div>

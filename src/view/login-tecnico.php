@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-    <?php require_once 'templates/template-head.php' ?>
+    <?php require_once __DIR__ . '/templates/template-head.php' ?>
     <title>Tatical Pro - Login Técnico</title>
 
 
@@ -132,7 +132,4 @@
         </div>
     </div>
 </div>
-<?php require_once "templates/template-rodape.php" ?>
-
-</body>
-</html>
+<?php require_once __DIR__ . "/templates/template-rodape.php" ?>

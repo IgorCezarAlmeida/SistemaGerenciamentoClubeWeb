@@ -42,6 +42,7 @@ class JogadorController {
         $resultado = JogadorFacade::listarTodos();
         $jogadores = $resultado['dados'];
         $erro = $resultado['sucesso'] ? null : $resultado['mensagem'];
+        $dadosDashboard = TecnicoController::getDadosDashboard(); // ✅
         require __DIR__ . "/../view/lista-jogadores.php";
     }
 

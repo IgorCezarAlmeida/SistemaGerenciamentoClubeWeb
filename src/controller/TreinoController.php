@@ -1,6 +1,8 @@
 <?php
 
+namespace controller;
 use dao\TreinoDAO;
+use Exception;
 use model\Treino;
 
 class TreinoController
@@ -52,13 +54,14 @@ class TreinoController
     }
     public function listar()
     {
+        $treinos = [];
         try {
             $treinos = TreinoDAO::listar();
         } catch (Exception $ex) {
             echo "Falha ao listar as treinos" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/lista-treinos.php";
         }
+        $dadosDashboard = TecnicoController::getDadosDashboard();
+        require __DIR__ . "/../view/lista-treinos.php";
     }
 
     public function buscar(array $params)
@@ -69,10 +72,28 @@ class TreinoController
             if (empty($treino)) {
                 throw new Exception("Treino não encontrado");
             }
+            $erro = null;
         } catch (Exception $ex) {
-            echo "Falha ao buscar treino" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/visualizar-treino.php";
+            $treino = null;
+            $erro = "Falha ao buscar treino: " . $ex->getMessage();
         }
+        require __DIR__ . "/../view/visualizar-treino.php";
+    }
+
+    public function remover(array $params)
+    {
+        try {
+            $id = $params['id'];
+            $treino = TreinoDAO::buscarId($id);
+            if (empty($treino)) {
+                throw new Exception("Treino não encontrado");
+            }
+            TreinoDAO::deletar($treino);
+            $_SESSION['sucesso'] = 'Treino removido com sucesso!';
+        } catch (Exception $e) {
+            $_SESSION['erro'] = 'Falha ao remover treino: ' . $e->getMessage();
+        }
+        header('Location: ' . BASE_URL . '/treinos');
+        exit;
     }
 }

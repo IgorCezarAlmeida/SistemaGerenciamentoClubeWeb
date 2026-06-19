@@ -5,18 +5,19 @@
 use model\Jogador;
 
 $rota_jogadores = BASE_URL . "/jogadores";
+$dadosDashboard = $dadosDashboard ?? null;
 ?>
 <!doctype html>
 <html lang="pt-br">
 <head>
-    <?php require_once 'templates/template-head.php' ?>
+    <?php require_once __DIR__ . '/templates/template-head.php' ?>
     <title>Lista de Jogadores</title>
 </head>
 <body class="container">
-<?php require_once "templates/template-menu.php" ?>
+<?php require_once __DIR__ . "/templates/template-menu.php" ?>
 
 <h1>Listagem de Jogadores</h1>
-<a class="btn btn-primary" href="<?= BASE_URL . '/jogadores/novo' ?>">Cadastrar Jogador</a>
+<a class="btn btn-primary" href="<?= BASE_URL . '/jogadores/cadastrar' ?>">Cadastrar Jogador</a>
 <table>
     <thead>
     <tr>
@@ -55,6 +56,4 @@ $rota_jogadores = BASE_URL . "/jogadores";
     <?php endforeach; ?>
     </tbody>
 </table>
-<?php require_once "templates/template-rodape.php" ?>
-</body>
-</html>
+<?php require_once __DIR__ . "/templates/template-rodape.php" ?>

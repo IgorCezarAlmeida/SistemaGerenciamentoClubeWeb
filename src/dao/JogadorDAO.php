@@ -33,5 +33,37 @@ class JogadorDAO extends GenericDAO {
             throw new Exception("Falha ao buscar jogador pelo nome. " . $ex->getMessage());
         }
     }
+    public function contarTodos(): int
+    {
+        try {
+            $em = Conexao::getEntityManager();
+            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j");
+            return (int) $query->getSingleScalarResult();
+        } catch (Exception $ex) {
+            return 0;
+        }
+    }
+
+    public function contarLesionados(): int
+    {
+        try {
+            $em = Conexao::getEntityManager();
+            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j WHERE j.status = 'lesionado'");
+            return (int) $query->getSingleScalarResult();
+        } catch (Exception $ex) {
+            return 0;
+        }
+    }
+
+    public function contarDisponiveis(): int
+    {
+        try {
+            $em = Conexao::getEntityManager();
+            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j WHERE j.status = 'disponivel'");
+            return (int) $query->getSingleScalarResult();
+        } catch (Exception $ex) {
+            return 0;
+        }
+    }
 
 }

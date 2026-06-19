@@ -1,5 +1,6 @@
 <?php
 
+namespace controller;
 use dao\EstatisticasDAO;
 use model\Estatisticas;
 
@@ -61,13 +62,14 @@ class EstatisticasController{
     }
     public function listar()
     {
+        $estatisticas = [];
         try {
             $estatisticas = EstatisticasDAO::listar();
         } catch (Exception $ex) {
             echo "Falha ao listar as estatisticas" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/estatisticas-jogadores.php";
         }
+        $dadosDashboard = \controller\TecnicoController::getDadosDashboard(); // ✅
+        require __DIR__ . "/../view/estatisticas-jogadores.php";
     }
 
     public function buscar(array $params)
@@ -76,12 +78,30 @@ class EstatisticasController{
             $id = $params['id'];
             $estatistica = EstatisticasDAO::buscarId($id);
             if (empty($estatistica)) {
-                throw new Exception("Estatistica não encontrado");
+                throw new Exception("Estatística não encontrada");
             }
+            $erro = null;
         } catch (Exception $ex) {
-            echo "Falha ao buscar Estatistica" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/visualizar-estatistica.php";
+            $estatistica = null;
+            $erro = "Falha ao buscar Estatística: " . $ex->getMessage();
         }
+        require __DIR__ . "/../view/visualizar-estatistica.php";
+    }
+
+    public function remover(array $params)
+    {
+        try {
+            $id = $params['id'];
+            $estatistica = EstatisticasDAO::buscarId($id);
+            if (empty($estatistica)) {
+                throw new Exception("Estatística não encontrada");
+            }
+            EstatisticasDAO::deletar($estatistica);
+            $_SESSION['sucesso'] = 'Estatística removida com sucesso!';
+        } catch (Exception $e) {
+            $_SESSION['erro'] = 'Falha ao remover estatística: ' . $e->getMessage();
+        }
+        header('Location: ' . BASE_URL . '/estatisticas');
+        exit;
     }
 }

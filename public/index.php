@@ -16,19 +16,45 @@ define('BASE_URL', '/SistemaClubeWeb');
 // Configuração do "Dispatcher" (Despachante) de rotas
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     // Aqui você define suas rotas:
+    // Jogadores
     $r->get('/jogadores', 'JogadorController@listar');
     $r->get('/jogadores/novo', 'JogadorController@novo');
     $r->get('/jogadores/{id}/editar', 'JogadorController@editar');
     $r->get('/jogadores/{id}', 'JogadorController@buscar');
     $r->post('/jogadores/cadastrar', 'JogadorController@cadastrar');
     $r->post('/jogadores/{id}/remover', 'JogadorController@remover');
+    // Escalação
+    $r->get('/escalacoes', 'EscalacaoController@listar');
+    $r->get('/escalacoes/novo', 'EscalacaoController@novo');
+    $r->get('/escalacoes/{id}/editar', 'EscalacaoController@editar');
+    $r->get('/escalacoes/{id}', 'EscalacaoController@buscar');
+    $r->post('/escalacoes/cadastrar', 'EscalacaoController@cadastrar');
+    $r->post('/escalacoes/{id}/remover', 'EscalacaoController@remover');
+    // Estatistica
+    $r->get('/estatisticas', 'EstatisticasController@listar');
+    $r->get('/estatisticas/novo', 'EstatisticasController@novo');
+    $r->get('/estatisticas/{id}/editar', 'EstatisticasController@editar');
+    $r->get('/estatisticas/{id}', 'EstatisticasController@buscar');
+    $r->post('/estatisticas/cadastrar', 'EstatisticasController@cadastrar');
+    $r->post('/estatisticas/{id}/remover', 'EstatisticasController@remover');
+    // Treino
+    $r->get('/treinos', 'TreinoController@listar');
+    $r->get('/treinos/novo', 'TreinoController@novo');
+    $r->get('/treinos/{id}/editar', 'TreinoController@editar');
+    $r->get('/treinos/{id}', 'TreinoController@buscar');
+    $r->post('/treinos/cadastrar', 'TreinoController@cadastrar');
+    $r->post('/treinos/{id}/remover', 'TreinoController@remover');
+    // Tecnico
     $r->get('/tecnicos/novo', 'TecnicoController@novo');
     $r->get('/tecnicos/{id}/editar', 'TecnicoController@editar');
     $r->post('/tecnicos/cadastrar', 'TecnicoController@cadastrar');
     $r->post('/tecnicos/{id}/remover', 'TecnicoController@remover');
+    // Login
     $r->get('/login', 'TecnicoController@loginForm');
     $r->post('/login', 'TecnicoController@autenticar');
     $r->get('/logout', 'TecnicoController@logout');
+    // Menu
+    $r->get('/menu', 'TecnicoController@menu');
 });
 
 // Pega apenas o caminho da URL (ex: de "/projeto/clientes?id=1" extrai apenas "/projeto/clientes")
@@ -67,6 +93,10 @@ switch ($route[0]) {
         // Monta o nome completo da classe (Namespace) e instancia o Controller
         $controllerNamespace = "controller\\{$controllerClass}";
         $controller = new $controllerNamespace();
-        $controller->$action($params);
+        if (!empty($params)) {
+            $controller->$action($params);
+        } else {
+            $controller->$action();
+        }
         break;
 }

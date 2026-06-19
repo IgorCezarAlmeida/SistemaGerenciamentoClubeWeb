@@ -1,5 +1,5 @@
 <?php
-
+namespace controller;
 use dao\EscalacaoDAO;
 use model\Escalacao;
 
@@ -19,7 +19,7 @@ class EscalacaoController
 
 
             $escalacao = $id ? EscalacaoDAO::buscarId($id) : new Escalacao();
-            if(empty($cliente))
+            if (empty($cliente))
                 throw new Exception("Escalação não encontrada.");
             $escalacao->setEsquemaTatico($esquemaTatico);
             $escalacao->setInstrucoesGerais($instrucoesGerais);
@@ -33,6 +33,7 @@ class EscalacaoController
             exit;
         }
     }
+
     public function editar(array $params)
     {
         try {
@@ -50,13 +51,14 @@ class EscalacaoController
 
     public function listar()
     {
+        $escalacoes = [];
         try {
             $escalacoes = EscalacaoDAO::listar();
         } catch (Exception $ex) {
             echo "Falha ao listar as escalacoes" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/lista-escalacoes.php";
         }
+        $dadosDashboard = \controller\TecnicoController::getDadosDashboard(); // ✅
+        require __DIR__ . "/../view/lista-escalacoes.php";
     }
 
     public function buscar(array $params)
@@ -65,12 +67,30 @@ class EscalacaoController
             $id = $params['id'];
             $escalacao = EscalacaoDAO::buscarId($id);
             if (empty($escalacao)) {
-                throw new Exception("Escalação não encontrado");
+                throw new Exception("Escalação não encontrada");
             }
+            $erro = null;
         } catch (Exception $ex) {
-            echo "Falha ao buscar escalação" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/visualizar-escalacao.php";
+            $escalacao = null;
+            $erro = "Falha ao buscar escalação: " . $ex->getMessage();
         }
+        require __DIR__ . "/../view/visualizar-escalacao.php";
+    }
+
+    public function remover(array $params)
+    {
+        try {
+            $id = $params['id'];
+            $escalacao = EscalacaoDAO::buscarId($id);
+            if (empty($escalacao)) {
+                throw new Exception("Escalação não encontrada");
+            }
+            EscalacaoDAO::deletar($escalacao);
+            $_SESSION['sucesso'] = 'Escalação removida com sucesso!';
+        } catch (Exception $e) {
+            $_SESSION['erro'] = 'Falha ao remover escalação: ' . $e->getMessage();
+        }
+        header('Location: ' . BASE_URL . '/escalacoes');
+        exit;
     }
 }

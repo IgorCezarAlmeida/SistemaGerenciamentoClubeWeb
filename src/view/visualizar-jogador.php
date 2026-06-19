@@ -4,11 +4,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <?php require_once 'templates/template-head.php'?>
+    <?php require_once __DIR__ . '/templates/template-head.php'?>
     <title><?= $jogador->getNome() ?></title>
 </head>
 <body class="container">
-<?php require_once "templates/template-menu.php" ?>
+<?php require_once __DIR__ . "/templates/template-menu.php" ?>
 
 <h1><?= $jogador->getId() ?></h1>
 <h2><?= $jogador->getNome() ?></h2>
@@ -27,6 +27,4 @@
         <li><?= $contrato->getTempoContrato() ?></li>
     <?php endforeach; ?>
 </ul>
-<?php require_once "templates/template-rodape.php" ?>
-</body>
-</html>
+<?php require_once __DIR__ . "/templates/template-rodape.php" ?>

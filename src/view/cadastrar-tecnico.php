@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-    <?php require_once 'templates/template-head.php' ?>
+    <?php require_once __DIR__ . '/templates/template-head.php' ?>
     <title>Cadastro do Técnico</title>
     <style>
         .form-group {
@@ -76,20 +76,19 @@
     <div class="error-msg"><?= htmlspecialchars($erro) ?></div>
 <?php endif; ?>
 
-<form action="<?= BASE_URL ?>/tecnicos/cadastrar" method="POST" id="formTecnico">
-    <input type="hidden" name="id" value="<?= htmlspecialchars($tecnico->getId() ?? '') ?>">
 
+<form action="<?= BASE_URL ?>/tecnicos/cadastrar" method="POST" id="formTecnico">
+    <input type="hidden" name="id" value="<?= isset($tecnico) ? htmlspecialchars($tecnico->getId() ?? '') : '' ?>">
     <div class="form-group">
         <label for="nome">Nome:</label>
         <input id="nome" name="nome" type="text"
-               value="<?= htmlspecialchars($tecnico->getNome() ?? '') ?>"
-               required placeholder="Nome completo">
+               value="<?= isset($tecnico) ? htmlspecialchars($tecnico->getNome() ?? '') : '' ?>"               required placeholder="Nome completo">
     </div>
 
     <div class="form-group">
         <label for="cpf">CPF:</label>
         <input id="cpf" name="cpf" type="text"
-               value="<?= htmlspecialchars($tecnico->getCpf() ?? '') ?>"
+               value="<?= isset($tecnico) ? htmlspecialchars($tecnico->getCpf() ?? '') : '' ?>"
                placeholder="000.000.000-00"
                required
                maxlength="14">
@@ -99,7 +98,7 @@
     <div class="form-group">
         <label for="email">E-mail:</label>
         <input id="email" name="email" type="email"
-               value="<?= htmlspecialchars($tecnico->getEmail() ?? '') ?>"
+               value="<?= isset($tecnico) ? htmlspecialchars($tecnico->getEmail() ?? '') : '' ?>"
                required
                placeholder="usuario@email.com">
     </div>
@@ -107,7 +106,7 @@
     <div class="form-group">
         <label for="dataNascimento">Data de Nascimento:</label>
         <input id="dataNascimento" name="dataNascimento" type="date"
-               value="<?= isset($tecnico) && $tecnico->getDataNascimento() ? $tecnico->getDataNascimento()->format('d-m-Y') : '' ?>"
+               value="<?= isset($tecnico) && $tecnico->getDataNascimento() ? $tecnico->getDataNascimento()->format('Y-m-d') : '' ?>"
                required>
     </div>
 
@@ -130,6 +129,4 @@
 </form>
 
 
-<?php require_once "templates/template-rodape.php" ?>
-</body>
-</html>
+<?php require_once __DIR__ . "/templates/template-rodape.php" ?>
