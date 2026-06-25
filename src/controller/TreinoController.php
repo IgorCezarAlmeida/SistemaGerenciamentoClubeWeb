@@ -9,6 +9,10 @@ class TreinoController
 {
     public function novo()
     {
+        $treino = null;
+        $erro = $_SESSION['erro_cadastro'] ?? null;
+        unset($_SESSION['erro_cadastro']);
+        $dadosDashboard = TecnicoController::getDadosDashboard();
         require __DIR__ . "/../view/cadastro-treino.php";
     }
 
@@ -30,6 +34,7 @@ class TreinoController
             $treino->setDescricao($descricao);
 
             TreinoDAO::salvar($treino);
+            AtividadeHelper::registrarAtividade("Treino criado/atualizado", 'treino');
             header('Location:' . BASE_URL . '/treinos');
         } catch (Exception $e) {
             echo 'Falha ao salvar a Treino.' . $e->getMessage();
@@ -38,19 +43,21 @@ class TreinoController
             exit;
         }
     }
-    public function editar(array $params)
+     public function editar(array $params)
     {
         try {
             $id = $params['id'];
-            $jogador = TreinoDAO::buscarId($id);
-            if (empty($jogador)) {
+            $treino = TreinoDAO::buscarId($id);
+            if (empty($treino)) {
                 throw new Exception("Treino não encontrado");
             }
+            $erro = null;
         } catch (Exception $ex) {
-            echo "Falha ao buscar Treino" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/cadastro-treino.php";
+            $treino = null;
+            $erro = "Falha ao buscar treino: " . $ex->getMessage();
         }
+        $dadosDashboard = TecnicoController::getDadosDashboard();
+        require __DIR__ . "/../view/cadastro-treino.php";
     }
     public function listar()
     {

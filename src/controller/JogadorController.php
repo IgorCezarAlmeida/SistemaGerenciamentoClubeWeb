@@ -10,6 +10,7 @@ class JogadorController {
         $jogador = null;
         $erro = $_SESSION['erro_cadastro'] ?? null;
         unset($_SESSION['erro_cadastro']);
+        $dadosDashboard = TecnicoController::getDadosDashboard();
         require __DIR__ . "/../view/cadastro-jogador.php";
     }
 
@@ -57,6 +58,7 @@ class JogadorController {
             $erro = $resultado['mensagem'];
         }
 
+        $dadosDashboard = TecnicoController::getDadosDashboard();
         require __DIR__ . "/../view/visualizar-jogador.php";
     }
 

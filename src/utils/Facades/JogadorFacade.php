@@ -82,6 +82,7 @@ class JogadorFacade extends BaseFacade
 
             JogadorDAO::salvar($jogador);
             self::log("Novo jogador criado: {$jogador->getNome()} (ID: {$jogador->getId()})");
+            AtividadeHelper::registrarAtividade("Novo jogador cadastrado: " . $jogador->getNome(), 'jogador');
 
             return [
                 'sucesso' => true,
@@ -123,6 +124,7 @@ class JogadorFacade extends BaseFacade
 
             JogadorDAO::salvar($jogador);
             self::log("Jogador $id atualizado");
+            AtividadeHelper::registrarAtividade("Jogador atualizado: " . $jogador->getNome(), 'jogador');
 
             return [
                 'sucesso' => true,
@@ -150,6 +152,7 @@ class JogadorFacade extends BaseFacade
 
             JogadorDAO::deletar($jogador);
             self::log("Jogador $id deletado");
+            AtividadeHelper::registrarAtividade("Jogador removido: " . $jogador->getNome(), 'jogador');
 
             return [
                 'sucesso' => true,

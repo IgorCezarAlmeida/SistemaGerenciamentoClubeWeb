@@ -25,6 +25,7 @@ class EscalacaoController
             $escalacao->setInstrucoesGerais($instrucoesGerais);
 
             EscalacaoDAO::salvar($escalacao);
+            AtividadeHelper::registrarAtividade("Escalação criada/atualizada", 'escalacao');
             header('Location:' . BASE_URL . '/escalacoes');
         } catch (Exception $e) {
             echo 'Falha ao salvar a Escalação.' . $e->getMessage();
@@ -43,10 +44,11 @@ class EscalacaoController
                 throw new Exception("Escalação não encontrada");
             }
         } catch (Exception $ex) {
-            echo "Falha ao buscar escalaçao" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/cadastro-escalacao.php";
+            $escalacao = null;
+            $erro = "Falha ao buscar escalação: " . $ex->getMessage();
         }
+        $dadosDashboard = TecnicoController::getDadosDashboard();
+        require __DIR__ . "/../view/cadastro-escalacao.php";
     }
 
     public function listar()

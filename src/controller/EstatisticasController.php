@@ -7,6 +7,10 @@ use model\Estatisticas;
 class EstatisticasController{
     public function novo()
     {
+        $estatisticas = null;
+        $erro = $_SESSION['erro_cadastro'] ?? null;
+        unset($_SESSION['erro_cadastro']);
+        $dadosDashboard = TecnicoController::getDadosDashboard();
         require __DIR__ . "/../view/cadastro-estatisticas.php";
     }
 
@@ -38,6 +42,7 @@ class EstatisticasController{
             $estatisticas->setCartoesVermelhos($cartoesVermelhos);
 
             EstatisticasDAO::salvar($estatisticas);
+            AtividadeHelper::registrarAtividade("Estatística criada/atualizada", 'estatisticas');
             header('Location:' . BASE_URL . '/estatisticas');
         } catch (Exception $e) {
             echo 'Falha ao salvar a Estatistica.' . $e->getMessage();
@@ -46,19 +51,21 @@ class EstatisticasController{
             exit;
         }
     }
-    public function editar(array $params)
+     public function editar(array $params)
     {
         try {
             $id = $params['id'];
-            $jogador = EstatisticasDAO::buscarId($id);
-            if (empty($jogador)) {
+            $estatistica = EstatisticasDAO::buscarId($id);
+            if (empty($estatistica)) {
                 throw new Exception("Estatisticas não encontradas");
             }
+            $erro = null;
         } catch (Exception $ex) {
-            echo "Falha ao buscar Estatistica" . $ex->getMessage();
-        } finally {
-            require __DIR__ . "/../view/estatisticas-jogadores.php";
+            $estatistica = null;
+            $erro = "Falha ao buscar Estatistica: " . $ex->getMessage();
         }
+        $dadosDashboard = TecnicoController::getDadosDashboard();
+        require __DIR__ . "/../view/cadastro-estatisticas.php";
     }
     public function listar()
     {

@@ -137,6 +137,7 @@ class EscalacaoFacade extends BaseFacade
 
             EscalacaoDAO::deletar($escalacao);
             self::log("Escalação $id deletada");
+            AtividadeHelper::registrarAtividade("Escalação removida", 'escalacao');
 
             return [
                 'sucesso' => true,

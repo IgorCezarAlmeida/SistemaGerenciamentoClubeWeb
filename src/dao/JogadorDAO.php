@@ -48,7 +48,7 @@ class JogadorDAO extends GenericDAO {
     {
         try {
             $em = Conexao::getEntityManager();
-            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j WHERE j.status = 'lesionado'");
+            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j WHERE j.disponivel = 'lesionado'");
             return (int) $query->getSingleScalarResult();
         } catch (Exception $ex) {
             return 0;
@@ -59,7 +59,7 @@ class JogadorDAO extends GenericDAO {
     {
         try {
             $em = Conexao::getEntityManager();
-            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j WHERE j.status = 'disponivel'");
+            $query = $em->createQuery("SELECT COUNT(j.id) FROM model\\Jogador j WHERE j.disponivel = 'disponível'");
             return (int) $query->getSingleScalarResult();
         } catch (Exception $ex) {
             return 0;

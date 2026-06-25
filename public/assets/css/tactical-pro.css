@@ -1,0 +1,375 @@
+/* ========================================
+   TACTICAL PRO - Estilos Gerais
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #e5e7eb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+/* ========================================
+   MENU LATERAL (SIDEBAR)
+   ======================================== */
+
+.sidebar {
+    background-color: #111827;
+    min-height: 100vh;
+    color: #fff;
+    border-right: 2px solid #000;
+    width: 250px;
+    flex-shrink: 0;
+    padding: 1.5rem;
+}
+
+.sidebar h4 {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .nav-link {
+    color: #9ca3af;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.sidebar .nav-link:hover {
+    color: #fff;
+}
+
+.sidebar .nav-link.active {
+    background-color: #f97316;
+    color: #fff;
+    box-shadow: 3px 3px 0px #000;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #1f2937;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #f97316;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #000;
+}
+
+/* ========================================
+   CONTEÚDO PRINCIPAL
+   ======================================== */
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #d1d5db;
+    background-color: #fff;
+}
+
+.content-header h1,
+.content-header h2,
+.content-header h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.content-body {
+    flex: 1;
+    padding: 2rem;
+    overflow: auto;
+}
+
+/* ========================================
+   CARDS NEOBRUTALISTAS
+   ======================================== */
+
+.card,
+.neo-card {
+    background-color: #fff;
+    border: 2px solid #111827;
+    border-radius: 0px;
+    box-shadow: 6px 6px 0px #111827;
+    margin-bottom: 20px;
+}
+
+.card.neo-card-green,
+.neo-card-green {
+    background-color: #ecfdf5;
+}
+
+.card.neo-card-red,
+.neo-card-red {
+    background-color: #fef2f2;
+}
+
+.card.neo-card-dark,
+.neo-card-dark {
+    background-color: #111827;
+    color: #fff;
+    border-color: #000;
+}
+
+/* ========================================
+   TABELAS
+   ======================================== */
+
+.table {
+    background-color: #fff;
+    border: 2px solid #111827;
+    margin-bottom: 0;
+}
+
+.table thead {
+    background-color: #111827;
+    color: #fff;
+}
+
+.table thead th {
+    border-color: #000;
+    font-weight: 600;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.table-responsive {
+    border: 2px solid #111827;
+    border-radius: 0;
+}
+
+/* ========================================
+   BOTÕES
+   ======================================== */
+
+.btn {
+    border: 2px solid #111827;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+}
+
+.btn-primary {
+    background-color: #f97316;
+    border-color: #f97316;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #ea580c;
+    border-color: #ea580c;
+    box-shadow: 3px 3px 0px #111827;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    border-color: #111827;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+    box-shadow: 3px 3px 0px #111827;
+    color: #fff;
+}
+
+.btn-warning {
+    background-color: #fbbf24;
+    border-color: #111827;
+    color: #000;
+}
+
+.btn-warning:hover {
+    background-color: #f59e0b;
+    box-shadow: 3px 3px 0px #111827;
+    color: #000;
+}
+
+.btn-info {
+    background-color: #06b6d4;
+    border-color: #111827;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #0891b2;
+    box-shadow: 3px 3px 0px #111827;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    border-color: #111827;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+    box-shadow: 3px 3px 0px #111827;
+    color: #fff;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   ALERTAS
+   ======================================== */
+
+.alert {
+    border: 2px solid #111827;
+    border-radius: 0px;
+    box-shadow: 3px 3px 0px #111827;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background-color: #ecfdf5;
+    border-color: #10b981;
+    color: #065f46;
+}
+
+.alert-danger {
+    background-color: #fef2f2;
+    border-color: #ef4444;
+    color: #7f1d1d;
+}
+
+.alert-warning {
+    background-color: #fffbeb;
+    border-color: #f59e0b;
+    color: #78350f;
+}
+
+.alert-info {
+    background-color: #ecf0ff;
+    border-color: #3b82f6;
+    color: #1e3a8a;
+}
+
+.btn-close {
+    background-color: transparent;
+    border: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+.form-control,
+.form-select,
+.form-label {
+    border-color: #111827;
+}
+
+.form-control,
+.form-select {
+    border: 2px solid #111827;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .layout-wrapper {
+        flex-direction: column;
+    }
+
+    .content-body {
+        padding: 1rem;
+    }
+
+    .content-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .btn-sm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+    }
+}
+
