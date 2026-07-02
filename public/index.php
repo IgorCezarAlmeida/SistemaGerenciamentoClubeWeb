@@ -15,6 +15,9 @@ define('BASE_URL', '');
 
 // Configuração do "Dispatcher" (Despachante) de rotas
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    // Rota raiz - redireciona para menu ou login
+    $r->get('/', 'TecnicoController@menu');
+    
     // Aqui você define suas rotas:
     // Jogadores
     $r->get('/jogadores', 'JogadorController@listar');
@@ -60,9 +63,15 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 // Pega apenas o caminho da URL (ex: de "/projeto/clientes?id=1" extrai apenas "/projeto/clientes")
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-// Limpa o caminho base para que o roteador entenda a rota idependente da pasta onde o projeto está.
-$basePath = rtrim(dirname(dirname($_SERVER['SCRIPT_NAME'])), '/');
-$uri = substr($uri, strlen($basePath)) ?: '/';
+// Limpa o caminho base para que o roteador entenda a rota independente do ambiente
+// Em XAMPP: /SistemaClubeWeb/public/... → /...
+// Em Render/Produção: /public/... → /...
+$scriptDir = dirname($_SERVER['SCRIPT_NAME']);  // /SistemaClubeWeb/public ou /public
+$basePath = rtrim(dirname($scriptDir), '/');    // /SistemaClubeWeb ou vazio
+if (!empty($basePath) && strpos($uri, $basePath) === 0) {
+    $uri = substr($uri, strlen($basePath));
+}
+$uri = $uri ?: '/';
 
 // Pega o método da requisição (GET, POST, etc.)
 $method = $_SERVER['REQUEST_METHOD'];
