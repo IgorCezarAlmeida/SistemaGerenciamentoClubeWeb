@@ -11,7 +11,7 @@ session_start();
 require "../vendor/autoload.php";
 
 # Define uma constante com o caminho base do projeto
-define('BASE_URL', '/SistemaClubeWeb');
+define('BASE_URL', '');
 
 // Configuração do "Dispatcher" (Despachante) de rotas
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
@@ -85,12 +85,8 @@ switch ($route[0]) {
         break;
 
     case FastRoute\Dispatcher::FOUND:
-        // ROTA ENCONTRADA!
-        // $route[1] contém 'ClienteController@listar'
-        // $route[2] contém os parâmetros (ex: ['id' => '10'])
         [$controllerClass, $action] = explode('@', $route[1]);
         $params = $route[2];
-        // Monta o nome completo da classe (Namespace) e instancia o Controller
         $controllerNamespace = "controller\\{$controllerClass}";
         $controller = new $controllerNamespace();
         if (!empty($params)) {

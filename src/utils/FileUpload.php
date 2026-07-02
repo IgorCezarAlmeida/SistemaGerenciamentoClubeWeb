@@ -3,18 +3,18 @@
 namespace utils;
 
 use Cloudinary\Cloudinary;
-use Dotenv\Dotenv;
 use Exception;
 
 class FileUpload{
     private static $storage;
 
+    private static function env(string $key): ?string {
+        return $_ENV[$key] ?? getenv($key) ?: null;
+    }
+
     private static function getStorage(){
         if (self::$storage === null) {
-            $dotenv = Dotenv::createImmutable(dirname(__DIR__, 2));
-            $dotenv->load();
-
-            self::$storage = new Cloudinary($_ENV['CLOUDINARY_URL']);
+            self::$storage = new Cloudinary(self::env('CLOUDINARY_URL'));
         }
         return self::$storage;
     }
