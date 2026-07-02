@@ -1,27 +1,44 @@
-# Usa a imagem oficial do PHP 8.2 com servidor Apache
+# ============ STAGE 1: Builder (Instala dependências) ============
+FROM composer:2 as builder
+
+WORKDIR /app
+
+# Copia arquivos de dependência
+COPY composer.json composer.lock ./
+
+# Instala dependências sem dev, com cache limpo
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --prefer-dist \
+    --no-progress \
+    --no-scripts \
+    --ignore-platform-reqs
+
+# ============ STAGE 2: Runtime (Imagem final) ============
 FROM php:8.2-apache
 
-# Habilita o mod_rewrite do Apache (Obrigatório para o seu .htaccess e Fast-Route funcionarem)
+# Habilita módulos Apache
 RUN a2enmod rewrite
 
-# Instala bibliotecas do sistema e extensões PHP exigidas pelas dependências
-RUN apt-get update && apt-get install -y git unzip libzip-dev libxml2-dev \
-    && docker-php-ext-install pdo_mysql zip dom
+# Instala extensões PHP e limpeza de cache em um RUN único
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git unzip libzip-dev libxml2-dev && \
+    docker-php-ext-install -j$(nproc) pdo_mysql zip dom && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copia o Composer direto da imagem oficial
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Define a pasta raiz do seu projeto no servidor
+# Define workdir
 WORKDIR /var/www/html
 
-# Copia os arquivos do seu repositório local para dentro do servidor
+# Copia código-fonte do projeto
 COPY . .
 
-# Instala as dependências do Composer (sem dependências de desenvolvimento)
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+# Copia vendor pré-compilado do builder
+COPY --from=builder /app/vendor ./vendor
 
-# Dá permissão ao Apache para ler os arquivos e gerenciar caches (útil pro Doctrine/Symfony Cache)
-RUN chown -R www-data:www-data /var/www/html
+# Permissões para Apache
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
-# Abre a porta 80 do container
+# Porta
 EXPOSE 80
