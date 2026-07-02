@@ -14,7 +14,14 @@ class FileUpload{
 
     private static function getStorage(){
         if (self::$storage === null) {
-            self::$storage = new Cloudinary(self::env('CLOUDINARY_URL'));
+            $cloudinaryUrl = self::env('CLOUDINARY_URL');
+            if (!$cloudinaryUrl) {
+                throw new Exception(
+                    "Variável CLOUDINARY_URL não configurada.\n" .
+                    "No Render.com, adicione em: Web Service > Environment > Add Environment Variable"
+                );
+            }
+            self::$storage = new Cloudinary($cloudinaryUrl);
         }
         return self::$storage;
     }
