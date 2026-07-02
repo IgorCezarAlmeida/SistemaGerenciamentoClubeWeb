@@ -1,4 +1,6 @@
 <?php
+use utils\AtividadeHelper;
+
 $dadosDashboard = $dadosDashboard ?? [];
 $nomeTime = $dadosDashboard['nome_time'] ?? 'Meu Time';
 $totalJogadores = $dadosDashboard['total_jogadores'] ?? 0;
@@ -61,7 +63,6 @@ $tecnicoNome = $dadosDashboard['tecnico_nome'] ?? 'Técnico';
                         <h5 class="fw-bold mb-4"><i class="bi bi-card-list"></i> Últimas Atividades</h5>
 
                         <?php
-                        use utils\AtividadeHelper;
                         $atividades = AtividadeHelper::obterAtividades(5);
 
                         if (empty($atividades)): ?>

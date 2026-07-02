@@ -16,7 +16,7 @@ $dadosDashboard = $dadosDashboard ?? null;
 
         <div class="content-header">
             <h1 class="m-0">Listagem de Jogadores</h1>
-            <a class="btn btn-primary" href="<?= BASE_URL . '/jogadores/cadastrar' ?>">Cadastrar Jogador</a>
+            <a class="btn btn-primary" href="<?= BASE_URL . '/jogadores/novo' ?>">Cadastrar Jogador</a>
         </div>
 
         <div class="content-body">
